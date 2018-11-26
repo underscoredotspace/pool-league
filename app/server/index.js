@@ -18,28 +18,6 @@ const app = express()
 const port = 3000
 
 app.get('/', (_, res) => res.send('Hello World!'))
-
-app.get('/player/:id', (req, res) => {
-  const { id } = req.params
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: 'Invalid Player ID' })
-  }
-
-  const Player = require('./models/Player')
-
-  Player.findById(id)
-    .then(player => {
-      if (!player) {
-        return res.status(404).json({ error: 'Player not found' })
-      }
-
-      res.json(player)
-    })
-    .catch(error => {
-      res.status(500).json({ error: 'Something went wrong' })
-      console.error(error)
-    })
-})
+app.use('/player', require('./players'))
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}/`))
