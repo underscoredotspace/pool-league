@@ -3,10 +3,7 @@ const Schema = mongoose.Schema
 
 module.exports = mongoose.model(
   'player',
-  new Schema(
-    {
-      name: String
-    },
-    { collection: 'players' }
-  )
+  new Schema({
+    name: String
+  })
 )

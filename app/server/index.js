@@ -18,6 +18,7 @@ const app = express()
 const port = 3000
 
 app.get('/', (_, res) => res.send('Hello World!'))
-app.use('/player', require('./players'))
+app.use('/player', require('./player/player-route'))
+app.use('/game', require('./game/game-route'))
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}/`))
