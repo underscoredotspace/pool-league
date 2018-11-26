@@ -1,0 +1,19 @@
+{
+  "name": "pool-league",
+  "version": "1.0.0",
+  "description": "Pool League",
+  "main": "app/server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/underscoredotspace/pool-league.git"
+  },
+  "author": "ampersand@underscore.space <Colin Tindle>",
+  "license": "CC-BY-4.0",
+  "bugs": {
+    "url": "https://github.com/underscoredotspace/pool-league/issues"
+  },
+  "homepage": "https://github.com/underscoredotspace/pool-league#readme"
+}
