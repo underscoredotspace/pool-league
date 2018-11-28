@@ -1,4 +1,5 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 require('dotenv').config()
@@ -16,6 +17,8 @@ mongoose
 
 const app = express()
 const port = 3000
+
+app.use(bodyParser.json())
 
 app.get('/', (_, res) => res.send('Hello World!'))
 app.use('/player', require('./player/player-route'))

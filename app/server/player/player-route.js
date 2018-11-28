@@ -2,6 +2,17 @@ const playerRoute = require('express').Router()
 const Player = require('./player-model')
 const validId = require('mongoose').Types.ObjectId.isValid
 
+playerRoute.get('/', (req, res) => {
+  Player.find()
+    .then(players => {
+      res.json(players)
+    })
+    .catch(error => {
+      res.status(500).json({ error: 'Something went wrong' })
+      console.error(error.message)
+    })
+})
+
 playerRoute.get('/:id', (req, res) => {
   const { id } = req.params
 
@@ -19,7 +30,19 @@ playerRoute.get('/:id', (req, res) => {
     })
     .catch(error => {
       res.status(500).json({ error: 'Something went wrong' })
-      console.error(error)
+      console.error(error.message)
+    })
+})
+
+playerRoute.post('/', (req, res) => {
+  new Player(req.body)
+    .save()
+    .then(player => {
+      res.json({ player })
+    })
+    .catch(error => {
+      res.status(500).json({ error: 'Something went wrong' })
+      console.error(error.message)
     })
 })
 

@@ -4,6 +4,6 @@ const Schema = mongoose.Schema
 module.exports = mongoose.model(
   'player',
   new Schema({
-    name: String
+    name: { type: String, required: true }
   })
 )
