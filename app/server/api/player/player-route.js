@@ -2,7 +2,7 @@ const playerRoute = require('express').Router()
 const Player = require('./player-model')
 const validId = require('mongoose').Types.ObjectId.isValid
 
-playerRoute.get('/', (req, res) => {
+playerRoute.get('/', (_, res) => {
   Player.find()
     .then(players => {
       res.json(players)

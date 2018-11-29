@@ -2,7 +2,7 @@ const gameRoute = require('express').Router()
 const Game = require('./game-model')
 const validId = require('mongoose').Types.ObjectId.isValid
 
-gameRoute.get('/', (req, res) => {
+gameRoute.get('/', (_, res) => {
   Game.find()
     .then(game => {
       res.json(game)

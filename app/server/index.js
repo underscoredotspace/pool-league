@@ -1,23 +1,28 @@
-const express = require('express')
-const path = require('path')
-const bodyParser = require('body-parser')
+require('dotenv').config()
+
+// Database Connection
 const mongoose = require('mongoose')
 
-require('dotenv').config()
+const { MDB_ADDR, PORT = 3001 } = process.env
+if (!MDB_ADDR) {
+  throw 'MongoDB Address required in env: MDB_ADDR'
+}
+
 mongoose
   .connect(
-    process.env.MDB_ADDR,
+    MDB_ADDR,
     { useNewUrlParser: true }
   )
-  .then(ok => {
-    console.log('Connected to mongo')
-  })
+  .then(() => console.log('Connected to mongo'))
   .catch(error => {
     throw new Error(error)
   })
 
+// Start Web Server
+const express = require('express')
+const path = require('path')
+const bodyParser = require('body-parser')
 const app = express()
-const port = 3000
 
 app.use(bodyParser.json())
 
@@ -25,4 +30,4 @@ app.get('/', express.static(path.join(__dirname, '../client')))
 app.use('/api', require('./api'))
 app.use('*', (_, res) => res.sendStatus(404))
 
-app.listen(port, () => console.log(`Listening on http://localhost:${port}/`))
+app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}/`))
