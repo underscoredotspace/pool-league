@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
@@ -20,8 +21,8 @@ const port = 3000
 
 app.use(bodyParser.json())
 
-app.get('/', (_, res) => res.send('Hello World!'))
-app.use('/player', require('./player/player-route'))
-app.use('/game', require('./game/game-route'))
+app.get('/', express.static(path.join(__dirname, '../client')))
+app.use('/api', require('./api'))
+app.use('*', (_, res) => res.sendStatus(404))
 
 app.listen(port, () => console.log(`Listening on http://localhost:${port}/`))

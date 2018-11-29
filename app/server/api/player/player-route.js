@@ -46,4 +46,6 @@ playerRoute.post('/', (req, res) => {
     })
 })
 
+playerRoute.use('*', (_, res) => res.sendStatus(404))
+
 module.exports = playerRoute

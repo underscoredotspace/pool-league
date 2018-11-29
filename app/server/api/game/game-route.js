@@ -2,6 +2,8 @@ const gameRoute = require('express').Router()
 const Game = require('./game-model')
 const validId = require('mongoose').Types.ObjectId.isValid
 
+gameRoute.get('/')
+
 gameRoute.get('/:id', (req, res) => {
   const { id } = req.params
 
@@ -22,5 +24,7 @@ gameRoute.get('/:id', (req, res) => {
       console.error(error)
     })
 })
+
+gameRoute.use('*', (_, res) => res.sendStatus(404))
 
 module.exports = gameRoute
