@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 
 const { MDB_ADDR, PORT = 3001 } = process.env
 if (!MDB_ADDR) {
-  throw 'MongoDB Address required in env: MDB_ADDR'
+  throw new Error('MongoDB Address required in env: MDB_ADDR')
 }
 
 mongoose
@@ -25,6 +25,7 @@ const bodyParser = require('body-parser')
 const app = express()
 
 app.use(bodyParser.json())
+app.set('json spaces', 2)
 
 app.get('/', express.static(path.join(__dirname, '../client')))
 app.use('/api', require('./api'))
