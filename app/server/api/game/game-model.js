@@ -9,19 +9,20 @@ const team = {
     required: true,
     validate: {
       validator: async function(players) {
-        for (const player1 of players) {
-          const id = player1._id.toHexString()
-
-          if (!(await Player.findById(id))) {
-            // Player ID supplied is invalid
-            return false
+        // Only check for duplicates when in team1
+        if (players['_path'] === 'team1.players') {
+          for (const player1 of players) {
+            if (!this.team2.players.find(player2 => player2._id.toHexString() !== player1._id.toHexString())) {
+              console.error(`Duplicate id ${player1._id.toHexString()}`)
+              return false
+            }
           }
+        }
 
-          // Only check for duplicates when in team1
-          if (players['_path'] === 'team1.players') {
-            // return false if Player ID appears in both teams
-            return !this.team2.players.find(player2 => player2._id.toHexString() === id)
-          }
+        const matches = await Promise.all(players.map(player => Player.findById(player._id)))
+        if (matches.includes(null)) {
+          console.error(`Invalid id in ${JSON.stringify(players)}`)
+          return false
         }
 
         return true
