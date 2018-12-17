@@ -24,11 +24,12 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const app = express()
 
+app.use(require('morgan')('dev'))
 app.use(bodyParser.json())
 app.set('json spaces', 2)
 
-app.get('/', express.static(path.join(__dirname, '../client')))
+app.use(express.static(path.join(__dirname, '../../dist/')))
 app.use('/api', require('./api'))
-app.use('*', (_, res) => res.sendStatus(404))
+app.use((_, res) => res.sendStatus(404))
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}/`))
