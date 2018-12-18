@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const Player = require('../player/player-model')
+const Player = require('./player-model')
 
 const team = {
   name: { type: String, required: false },

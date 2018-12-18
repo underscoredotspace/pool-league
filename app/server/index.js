@@ -29,7 +29,8 @@ app.use(bodyParser.json())
 app.set('json spaces', 2)
 
 app.use(express.static(path.join(__dirname, '../../dist/')))
-app.use('/api', require('./api'))
+
+app.use('/graphql', require('./graphql'))
 app.use((_, res) => res.sendStatus(404))
 
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}/`))
