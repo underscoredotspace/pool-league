@@ -4,9 +4,9 @@
   "description": "Pool League",
   "main": "app/server/index.js",
   "scripts": {
-    "dev": "run-p dev:client dev:server",
-    "dev:client": "parcel watch app/client/index.html --public-url ./",
-    "dev:server": "nodemon"
+    "start": "run-p start:client start:server",
+    "start:client": "parcel watch app/client/index.html --public-url ./",
+    "start:server": "nodemon"
   },
   "repository": {
     "type": "git",
